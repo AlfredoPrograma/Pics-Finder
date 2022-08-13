@@ -51,14 +51,14 @@ const MOCK_PICTURES: Picture[] = [
 
 describe('pics grid', () => {
   test('renders component', () => {
-    render(<PicsGrid pictures={MOCK_PICTURES} />)
+    render(<PicsGrid pictures={MOCK_PICTURES} isLoading={false} />)
 
     const renderedComponent = screen.getByTestId('picsGridComponent')
     expect(renderedComponent).toBeInTheDocument()
   })
 
   test('renders two pictures cards', () => {
-    render(<PicsGrid pictures={MOCK_PICTURES} />)
+    render(<PicsGrid pictures={MOCK_PICTURES} isLoading={false} />)
 
     const renderedPicturesAmount = screen.getAllByRole('figure')
     expect(renderedPicturesAmount.length).toBe(2)
@@ -67,7 +67,7 @@ describe('pics grid', () => {
   test('renders not found pictures error', () => {
     const MOCK_EMPTY_PICTURES: Picture[] = []
 
-    render(<PicsGrid pictures={MOCK_EMPTY_PICTURES} />)
+    render(<PicsGrid pictures={MOCK_EMPTY_PICTURES} isLoading={false} />)
 
     const renderedError = screen.getByTestId('notFoundPicsErrorComponent')
     expect(renderedError).toBeInTheDocument()

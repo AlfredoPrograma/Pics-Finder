@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { useHomePageController } from './hooks/useHomePageController'
 
 const HomePage = () => {
-  const { pictures, handleSearch } = useHomePageController()
+  const { pictures, handleSearch, isLoadingPictures } = useHomePageController()
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -33,7 +33,7 @@ const HomePage = () => {
         </button>
       </form>
 
-      <PicsGrid pictures={pictures} />
+      <PicsGrid pictures={pictures} isLoading={isLoadingPictures} />
     </Container>
   )
 }
