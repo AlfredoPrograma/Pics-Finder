@@ -5,7 +5,6 @@ import { useHomePageController } from './hooks/useHomePageController'
 
 const HomePage = () => {
   const { pictures, handleSearch, isLoadingPictures } = useHomePageController()
-
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (

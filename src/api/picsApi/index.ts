@@ -1,1 +1,1 @@
-export { fetchAllImages, fetchImagesByKeyword } from './picsApi'
+export { fetchPicturesByKeyword, fetchRecommendedPictures } from './picsApi'

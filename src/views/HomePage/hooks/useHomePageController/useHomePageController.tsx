@@ -1,4 +1,4 @@
-import { fetchAllImages, fetchImagesByKeyword } from 'api/picsApi'
+import { fetchRecommendedPictures, fetchPicturesByKeyword } from 'api/picsApi'
 import { useFetch } from 'hooks/useFetch'
 import { useEffect, useMemo, useState } from 'react'
 import { Picture } from 'types/pictures/Picture'
@@ -10,9 +10,9 @@ const HomePageController = () => {
 
   const dispatcher = !!useMemo(() => keyword, [keyword])
 
-  const { data: recommendedPictures, fetchStatus: fetchRecommendedPicturesStatus } = useFetch<PicturesApiResponse>(fetchAllImages)
+  const { data: recommendedPictures, fetchStatus: fetchRecommendedPicturesStatus } = useFetch<PicturesApiResponse>(fetchRecommendedPictures)
   const { data: picturesByKeyword, fetchStatus: fetchImagesByKeywordStatus } =
-    useFetch<PicturesApiResponse>(() => fetchImagesByKeyword(keyword), {
+    useFetch<PicturesApiResponse>(() => fetchPicturesByKeyword(keyword), {
       autoInitialize: false,
       dispatcher,
       dependencies: keyword

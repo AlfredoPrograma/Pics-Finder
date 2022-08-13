@@ -1,4 +1,4 @@
-import { fetchAllImages, fetchImagesByKeyword } from './picsApi'
+import { fetchPicturesByKeyword, fetchRecommendedPictures } from './picsApi'
 import { rest, RequestHandler } from 'msw'
 import { setupServer } from 'msw/node'
 
@@ -112,13 +112,13 @@ describe('pictures API layer', () => {
   afterAll(() => fakePicsServer.close())
 
   test('returns recommended pictures array', async () => {
-    const response = await fetchAllImages()
+    const response = await fetchRecommendedPictures()
     expect(response).toHaveLength(2)
   })
 
   test('returns searched pictures by keyword', async () => {
     const KEYWORD = 'duck'
-    const response = await fetchImagesByKeyword(KEYWORD)
+    const response = await fetchPicturesByKeyword(KEYWORD)
 
     expect(response).toHaveLength(2)
   })
