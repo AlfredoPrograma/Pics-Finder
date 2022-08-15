@@ -1,11 +1,16 @@
 import { Container } from 'components/Container'
 import { PicsGrid } from 'components/PicsGrid'
-import { useRef } from 'react'
-import { useHomePageController } from './hooks/useHomePageController'
+import { FormEvent, useRef, useState } from 'react'
 
 const HomePage = () => {
-  const { pictures, handleSearch, isLoadingPictures } = useHomePageController()
   const inputRef = useRef<HTMLInputElement>(null)
+  const [searchValue, setSearchValue] = useState<string>('')
+
+  const handleSearchPictures = (event: FormEvent) => {
+    event.preventDefault()
+    if (!inputRef.current) return
+    setSearchValue(inputRef.current?.value)
+  }
 
   return (
     <Container customStyles="pt-12 md:pt-24 pb-12 flex flex-col gap-8">
@@ -16,10 +21,7 @@ const HomePage = () => {
       <form
         role='form'
         className="flex justify-center items-center"
-        onSubmit={(event) => {
-          event.preventDefault()
-          handleSearch(inputRef.current?.value)
-        }}
+        onSubmit={handleSearchPictures}
       >
         <input
           ref={inputRef}
@@ -32,7 +34,7 @@ const HomePage = () => {
         </button>
       </form>
 
-      <PicsGrid pictures={pictures} isLoading={isLoadingPictures} />
+      <PicsGrid searchValue={searchValue} />
     </Container>
   )
 }

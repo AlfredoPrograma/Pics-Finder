@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useState } from 'react'
+import { forwardRef, RefObject, useState } from 'react'
 
 interface PictureCardProps {
   src: string;
@@ -7,13 +7,16 @@ interface PictureCardProps {
   size?: 'small' | 'big';
 }
 
-const PictureCard = ({ src, size = 'small' }: PictureCardProps) => {
+export type Ref = RefObject<HTMLElement>
+
+const PictureCard = forwardRef<Ref, PictureCardProps>(({ src, size = 'small' }, ref) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const handleLoadImage = () => setIsLoading(false)
 
   return (
     <figure
+      ref={ref as any}
       className={classNames('grid w-full h-full shadow-lg', {
         'row-span-2 col-span-2': size === 'big'
       })}
@@ -35,6 +38,8 @@ const PictureCard = ({ src, size = 'small' }: PictureCardProps) => {
       />
     </figure>
   )
-}
+})
+
+PictureCard.displayName = 'PictureCard'
 
 export default PictureCard

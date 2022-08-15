@@ -9,9 +9,9 @@ const picsApiConfig: AxiosRequestConfig = {
   }
 }
 
-const fetchRecommendedPictures = async () => (await api.get<PicturesApiResponse>('/curated', picsApiConfig)).data
-const fetchPicturesByKeyword = async (keyword: string) => (
-  (await api.get<PicturesApiResponse>(`/search?query=${keyword}`, picsApiConfig)).data
+const fetchRecommendedPictures = async (page: number = 1) => (await api.get<PicturesApiResponse>(`/curated?page=${page}`, picsApiConfig)).data
+const fetchPicturesByKeyword = async (keyword: string, page = 1) => (
+  (await api.get<PicturesApiResponse>(`/search?query=${keyword}&page=${page}`, picsApiConfig)).data
 )
 
 export { fetchRecommendedPictures, fetchPicturesByKeyword }
